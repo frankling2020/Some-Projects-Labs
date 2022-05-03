@@ -165,7 +165,7 @@ module CPU (
     assign write_data   = write_data_test[request_num]; 
 endmodule
 
-module lab6 (
+module main (
     input isWrite,
     input [9:0] addr,
     input [31:0] Wdata,
