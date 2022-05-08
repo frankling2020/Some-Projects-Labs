@@ -1,0 +1,15 @@
+
+# Hadoop Setup
+source /etc/profile
+export HADOOP_HOME="/root/hadoop"
+export PATH=$PATH:$HADOOP_HOME/bin
+export PATH=$PATH:$HADOOP_HOME/sbin
+export HADOOP_MAPRED_HOME=${HADOOP_HOME}
+export HADOOP_COMMON_HOME=${HADOOP_HOME}
+export HADOOP_HDFS_HOME=${HADOOP_HOME}
+export YARN_HOME=${HADOOP_HOME}
+
+sshd_status=$(service ssh status)
+if [[ $sshd_status = *"is not running"* ]]; then
+   service ssh --full-restart
+fi
