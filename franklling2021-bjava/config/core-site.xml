@@ -1,10 +1,14 @@
 <configuration>
-    <property> 
-       <name>fs.default.name</name> 
-       <value>hdfs://master:9000/</value> 
-    </property> 
-    <property> 
-       <name>dfs.permissions</name> 
-       <value>false</value> 
-    </property> 
- </configuration>
+	<property>
+		<name>fs.default.name</name>
+		<value>hdfs://localhost:9000/</value>
+	</property>
+	<property>
+		<name>hadoop.tmp.dir</name>
+		<value>/var/big_data</value>
+	</property>
+	<property>
+		<name>dfs.permissions</name>
+		<value>false</value>
+	</property>
+</configuration>

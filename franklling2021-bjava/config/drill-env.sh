@@ -1,0 +1,2 @@
+export DRILL_MAX_DIRECT_MEMORY="2G"
+export DRILL_HEAP="1G"
