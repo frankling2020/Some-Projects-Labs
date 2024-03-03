@@ -1,0 +1,6 @@
+docker-compose up -d --scale datanode=2 --scale nodemanager=2
+
+docker-compose down
+
+yarn jar share/hadoop/mapreduce/hadoop-mapreduce-examples-*.jar pi 10 15
+ 

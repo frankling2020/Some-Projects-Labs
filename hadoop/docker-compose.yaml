@@ -1,0 +1,50 @@
+version: "1"
+services:
+    namenode:
+        image: apache/hadoop:3
+        user: root
+        hostname: namenode
+        command: ["hdfs", "namenode"]
+        ports:
+            - 9870:9870
+        env_file:
+            - ./hadoop-config
+        environment:
+            ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
+    datanode:
+        image: apache/hadoop:3
+        user: root
+        command: ["hdfs", "datanode"]
+        env_file:
+            - ./hadoop-config
+    resourcemanager:
+        image: hadoop-spark
+        user: root
+        hostname: resourcemanager
+        command: ["yarn", "resourcemanager"]
+        environment:
+            - SPARK_MODE=master
+            - SPARK_DIST_CLASSPATH=$(hadoop classpath)
+        ports:
+            - 8088:8088
+            - 8080:8080
+        env_file:
+            - ./hadoop-config
+    nodemanager:
+        image: hadoop-spark
+        user: root
+        command: ["yarn", "nodemanager"]
+        environment:
+            - SPARK_MODE=worker
+            - SPARK_DIST_CLASSPATH=$(hadoop classpath)
+        env_file:
+            - ./hadoop-config
+    historyserver:
+        image: apache/hadoop:3
+        user: root
+        hostname: historyserver
+        command: ["sh", "-c", "mapred --daemon start historyserver; hdfs datanode"]
+        ports:
+            - 19888:19888
+        env_file:
+            - ./hadoop-config
